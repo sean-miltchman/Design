@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NutriPath</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ===== SIDEBAR (desktop) ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-icon">🔥</span>
+      NutriPath
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Home</span>
+      </button>
+      <button class="nav-btn" data-tab="log" onclick="switchTab('log')">
+        <span class="nav-icon">➕</span><span class="nav-label">Log Meal</span>
+      </button>
+      <button class="nav-btn" data-tab="plan" onclick="switchTab('plan')">
+        <span class="nav-icon">📋</span><span class="nav-label">My Plan</span>
+      </button>
+      <button class="nav-btn" data-tab="stats" onclick="switchTab('stats')">
+        <span class="nav-icon">📊</span><span class="nav-label">Stats</span>
+      </button>
+    </nav>
+    <div class="sidebar-user">
+      <div class="su-name" id="sidebarName">—</div>
+      <div class="su-level" id="sidebarLevel">⚡ Level 1</div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- ===== HOME TAB ===== -->
+    <div class="tab active" id="tab-home">
+
+      <div class="home-topbar">
+        <div id="homeGreeting" class="home-greeting"></div>
+        <div class="home-pills">
+          <span id="streakPill" class="streak-pill">🔥 0 days</span>
+          <span id="levelPill" class="level-pill">⚡ Lv.1</span>
+        </div>
+      </div>
+
+      <!-- Calorie hero + macros side by side -->
+      <div class="home-stats-row">
+        <div class="cal-hero">
+          <div class="cal-hero-top">
+            <div>
+              <div class="cal-remaining-num" id="calRemaining">—</div>
+              <div class="cal-remaining-lbl">calories remaining</div>
+            </div>
+            <div class="cal-eaten-block">
+              <div class="cal-eaten-num" id="calEaten">0</div>
+              <div class="cal-eaten-lbl">eaten / <span id="calTarget">—</span></div>
+            </div>
+          </div>
+          <div class="cal-wide-track">
+            <div class="cal-wide-fill" id="calWideFill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="macro-bars-card">
+          <div class="macro-bar-row">
+            <span class="mbar-label">💪 Protein</span>
+            <div class="mbar-track"><div class="mbar-fill" id="proFill" style="width:0%"></div></div>
+            <span class="mbar-nums" id="proNums">0/—g</span>
+          </div>
+          <div class="macro-bar-row">
+            <span class="mbar-label">🍚 Carbs</span>
+            <div class="mbar-track"><div class="mbar-fill" id="carbFill" style="width:0%"></div></div>
+            <span class="mbar-nums" id="carbNums">0/—g</span>
+          </div>
+          <div class="macro-bar-row">
+            <span class="mbar-label">🧈 Fat</span>
+            <div class="mbar-track"><div class="mbar-fill" id="fatFill" style="width:0%"></div></div>
+            <span class="mbar-nums" id="fatNums">0/—g</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meals grid (4 columns desktop, stack mobile) -->
+      <div class="meals-grid" id="mealsGrid">
+        <div id="meal-breakfast"></div>
+        <div id="meal-lunch"></div>
+        <div id="meal-dinner"></div>
+        <div id="meal-snack"></div>
+      </div>
+
+      <div class="water-tip">💧 Aim for 8 glasses of water today</div>
+    </div><!-- /home -->
+
+
+    <!-- ===== LOG TAB ===== -->
+    <div class="tab" id="tab-log">
+      <div class="tab-title">Log a Meal ➕</div>
+      <div class="log-layout">
+
+        <!-- Left: food search -->
+        <div class="log-main">
+          <div class="meal-type-grid">
+            <button class="meal-type-btn active" data-meal="breakfast" onclick="selectMeal('breakfast')">
+              <span class="mi">🌅</span><span class="ml">Breakfast</span>
+            </button>
+            <button class="meal-type-btn" data-meal="lunch" onclick="selectMeal('lunch')">
+              <span class="mi">☀️</span><span class="ml">Lunch</span>
+            </button>
+            <button class="meal-type-btn" data-meal="dinner" onclick="selectMeal('dinner')">
+              <span class="mi">🌙</span><span class="ml">Dinner</span>
+            </button>
+            <button class="meal-type-btn" data-meal="snack" onclick="selectMeal('snack')">
+              <span class="mi">🍎</span><span class="ml">Snack</span>
+            </button>
+          </div>
+
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="foodSearch" placeholder="Search 50+ foods…" oninput="renderSearch(this.value)"/>
+          </div>
+
+          <div id="foodListContainer"></div>
+
+          <div class="custom-section">
+            <button class="custom-toggle" onclick="toggleCustomForm()">➕ Add a custom food</button>
+            <div class="custom-form-wrap" id="customForm">
+              <div class="input-group">
+                <label>Food name *</label>
+                <input type="text" id="cName" placeholder="e.g. Protein Bar"/>
+              </div>
+              <div class="input-row">
+                <div class="input-group"><label>Emoji</label><input type="text" id="cEmoji" placeholder="🍫" maxlength="3"/></div>
+                <div class="input-group"><label>Cal / 100g *</label><input type="number" id="cCal" placeholder="200"/></div>
+              </div>
+              <div class="input-row">
+                <div class="input-group"><label>Protein (g)</label><input type="number" id="cPro" placeholder="20"/></div>
+                <div class="input-group"><label>Carbs (g)</label><input type="number" id="cCarb" placeholder="25"/></div>
+              </div>
+              <div class="input-row">
+                <div class="input-group"><label>Fat (g)</label><input type="number" id="cFat" placeholder="5"/></div>
+                <div style="display:flex;gap:14px;align-items:center;padding-top:8px;">
+                  <label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text)">
+                    <input type="checkbox" id="cVegan" style="accent-color:var(--teal)"/> 🌱 Vegan
+                  </label>
+                  <label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text)">
+                    <input type="checkbox" id="cNuts" style="accent-color:var(--amber)"/> 🥜 Contains nuts
+                  </label>
+                </div>
+              </div>
+              <button class="btn-primary" style="margin-top:16px;" onclick="saveCustomFood()">Save Food ✅</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: today's summary sidebar -->
+        <div class="log-sidebar">
+          <div class="log-today-card">
+            <div class="log-today-title">Today's Log</div>
+            <div class="log-today-cal">
+              <div class="ltc-num" id="logCalEaten">0</div>
+              <div class="ltc-lbl">/ <span id="logCalTarget">—</span> cal</div>
+            </div>
+            <div class="log-bar-track">
+              <div class="log-bar-fill" id="logBarFill" style="width:0%"></div>
+            </div>
+            <div class="log-macro-mini">
+              <div class="lmm-row">
+                <span class="lmm-label">💪 Protein</span>
+                <div class="lmm-bar-track"><div class="lmm-bar-fill" id="logProFill" style="width:0%;background:var(--teal)"></div></div>
+                <span class="lmm-nums" id="logProNums">0g</span>
+              </div>
+              <div class="lmm-row">
+                <span class="lmm-label">🍚 Carbs</span>
+                <div class="lmm-bar-track"><div class="lmm-bar-fill" id="logCarbFill" style="width:0%;background:var(--blue)"></div></div>
+                <span class="lmm-nums" id="logCarbNums">0g</span>
+              </div>
+              <div class="lmm-row">
+                <span class="lmm-label">🧈 Fat</span>
+                <div class="lmm-bar-track"><div class="lmm-bar-fill" id="logFatFill" style="width:0%;background:var(--amber)"></div></div>
+                <span class="lmm-nums" id="logFatNums">0g</span>
+              </div>
+            </div>
+            <div class="log-today-foods">
+              <div class="ltf-title">Logged Today</div>
+              <div id="logTodayList"><span style="font-size:12px;color:var(--muted2)">Nothing logged yet</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /log -->
+
+
+    <!-- ===== PLAN TAB ===== -->
+    <div class="tab" id="tab-plan">
+
+      <!-- Toolbar: goal info + action buttons -->
+      <div class="plan-toolbar">
+        <div class="plan-toolbar-left">
+          <span class="plan-goal-tag" id="planGoalBadge">💪 Bulk</span>
+          <span class="ptb-stat"><b id="planCals">—</b> cal/day</span>
+          <span class="ptb-dot">·</span>
+          <span class="ptb-stat"><b id="planPro">—</b> protein</span>
+          <span class="ptb-dot">·</span>
+          <span class="ptb-stat"><b id="planCarbs">—</b> carbs</span>
+          <span class="ptb-dot">·</span>
+          <span class="ptb-stat"><b id="planFat">—</b> fat</span>
+        </div>
+        <div class="plan-toolbar-right">
+          <button class="ptb-btn amber" onclick="surpriseMe()">🎲 Surprise Me</button>
+          <button class="ptb-btn" onclick="openEditProfile()">✏️ Edit Goals</button>
+        </div>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="plan-desktop-grid">
+
+        <!-- Left: today's detailed plan -->
+        <div class="plan-left">
+          <div class="plan-section-hdr">
+            <span class="psh-title">Today</span>
+            <span class="psh-sub" id="planTodayDay">Monday</span>
+          </div>
+          <div id="planTodayMeals"></div>
+        </div>
+
+        <!-- Right: rest of week -->
+        <div class="plan-right">
+          <div class="plan-section-hdr">
+            <span class="psh-title">This Week</span>
+          </div>
+          <div id="planDays"></div>
+        </div>
+
+      </div>
+    </div><!-- /plan -->
+
+
+    <!-- ===== STATS TAB ===== -->
+    <div class="tab" id="tab-stats">
+      <div class="stats-grid">
+
+        <div class="stats-left">
+          <div class="stats-hero">
+            <h3>🔥 <span id="statsStreak">0</span>-Day Streak</h3>
+            <p>Total XP: <strong id="statsXP">0</strong> — Keep logging to level up!</p>
+          </div>
+
+          <div class="fun-fact" id="funFact">🌟 Start logging your meals to unlock weekly insights!</div>
+
+          <div class="card">
+            <div class="card-title">This Week's Averages</div>
+            <div class="weekly-grid">
+              <div class="week-macro" id="weekPro"></div>
+              <div class="week-macro" id="weekCarb"></div>
+              <div class="week-macro" id="weekFat"></div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-title">Weekly Calories</div>
+            <div class="bar-chart" id="barChart"></div>
+            <div class="chart-legend">
+              <span><span class="legend-dot" style="background:var(--violet)"></span>Today</span>
+              <span><span class="legend-dot" style="background:var(--blue)"></span>Logged</span>
+              <span><span class="legend-dot" style="background:var(--amber)"></span>Over target</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-right">
+          <div class="card">
+            <div class="card-title">Badges 🏅</div>
+            <div class="badges-grid" id="badgesGrid"></div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /stats -->
+
+  </main><!-- /main-content -->
+</div><!-- /app-layout -->
+
+
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">
+    <span class="nav-icon">🏠</span><span class="nav-label">Home</span>
+  </button>
+  <button class="nav-btn" data-tab="log" onclick="switchTab('log')">
+    <span class="nav-icon">➕</span><span class="nav-label">Log</span>
+  </button>
+  <button class="nav-btn" data-tab="plan" onclick="switchTab('plan')">
+    <span class="nav-icon">📋</span><span class="nav-label">Plan</span>
+  </button>
+  <button class="nav-btn" data-tab="stats" onclick="switchTab('stats')">
+    <span class="nav-icon">📊</span><span class="nav-label">Stats</span>
+  </button>
+</nav>
+
+
+<!-- ===== FOOD LOG MODAL ===== -->
+<div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-food-header">
+      <span class="sheet-food-emoji" id="sheetFoodEmoji">🍗</span>
+      <div>
+        <div class="sheet-food-name" id="sheetFoodName">Food Name</div>
+        <div class="sheet-food-cal100" id="sheetFoodCal">165 cal per 100g</div>
+      </div>
+    </div>
+    <div class="amount-big" id="amountDisplay">100<span>g</span></div>
+    <input type="range" id="amountSlider" min="10" max="500" value="100" step="5"
+           class="amount-slider" style="width:100%;margin-bottom:4px;"
+           oninput="updateAmountPreview(this.value)"/>
+    <div class="macro-preview">
+      <div class="mprev"><div class="mv" id="prevCals">—</div><div class="ml">cal</div></div>
+      <div class="mprev"><div class="mv" id="prevPro">—</div><div class="ml">protein</div></div>
+      <div class="mprev"><div class="mv" id="prevCarb">—</div><div class="ml">carbs</div></div>
+      <div class="mprev"><div class="mv" id="prevFat">—</div><div class="ml">fat</div></div>
+    </div>
+    <button class="btn-primary" id="confirmBtn" onclick="confirmLog()">Log to Breakfast 🌅</button>
+    <button class="btn-secondary" style="margin-top:10px;" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+
+<!-- ===== EDIT PROFILE MODAL ===== -->
+<div class="modal-bg" id="editModal" onclick="handleModalBgClick(event)">
+  <div class="modal-card">
+    <h3>Edit Profile ✏️</h3>
+    <p class="modal-sub">Update your info to recalculate your plan.</p>
+    <div class="input-group"><label>Current weight (lbs)</label><input type="number" id="editWeight" min="50" max="500"/></div>
+    <div class="input-group"><label>Target weight (lbs)</label><input type="number" id="editTarget" min="50" max="500"/></div>
+    <div class="input-group"><label>Daily activity (minutes)</label><input type="number" id="editActivity" min="0" max="300"/></div>
+    <div class="input-group">
+      <label>Goal</label>
+      <select id="editGoal">
+        <option value="bulk">💪 Bulk — Gain muscle</option>
+        <option value="cut">🔥 Cut — Lose fat</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:20px;padding:12px 0;">
+      <label style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;cursor:pointer;color:var(--text)">
+        <input type="checkbox" id="editVegan" style="accent-color:var(--teal)"/> 🌱 Vegan
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;cursor:pointer;color:var(--text)">
+        <input type="checkbox" id="editNuts" style="accent-color:var(--amber)"/> 🥜 Peanut allergy
+      </label>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeEditProfile()">Cancel</button>
+      <button class="btn-primary" onclick="saveProfile()">Save &amp; Recalculate 🔄</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/nutrition.js"></script>
+<script src="js/main.js"></script>
+<script>
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('overlay')) closeModal();
+  }
+  function handleModalBgClick(e) {
+    if (e.target === document.getElementById('editModal')) closeEditProfile();
+  }
+</script>
+</body>
+</html>

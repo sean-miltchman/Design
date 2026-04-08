@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NutriPath — Your Personal Nutrition Planner</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="welcome-page">
+
+  <div class="welcome-inner">
+    <div class="welcome-logo-wrap">
+      <span class="welcome-flame">🔥</span>
+      <span class="welcome-logo-text">NutriPath</span>
+    </div>
+
+    <p class="welcome-tagline">
+      Personalized nutrition plans, smart meal tracking,<br>
+      and gamified habits — built just for you.
+    </p>
+
+    <div class="feature-chips">
+      <span class="feature-chip">🎯 Personalized Plans</span>
+      <span class="feature-chip">🔥 Streaks &amp; XP</span>
+      <span class="feature-chip">📊 Weekly Insights</span>
+      <span class="feature-chip">🌱 Diet-Aware</span>
+      <span class="feature-chip">🔒 100% Private</span>
+    </div>
+
+    <button class="btn-primary" onclick="begin()">Get Started →</button>
+    <p class="privacy-note">🔒 All your data stays on your device. No accounts, no tracking.</p>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script>
+    if (DB.getUser()) window.location.href = 'app.html';
+    function begin() { window.location.href = 'setup.html'; }
+  </script>
+</body>
+</html>

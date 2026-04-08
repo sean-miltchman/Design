@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NutriPath — Setup</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="setup-page" style="background:var(--bg)">
+
+  <!-- Progress header -->
+  <div class="setup-panel">
+  <div class="setup-header">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="step-label" id="stepLabel">Step 1 of 6</div>
+  </div>
+
+  </div><!-- /setup-header -->
+  <div class="setup-body">
+
+    <!-- STEP 1: Name & Age -->
+    <div class="setup-step active" id="step1">
+      <div class="step-title">Let's get to know you! 👋</div>
+      <p class="step-subtitle">Don't worry — this info stays on your device.</p>
+      <div class="input-group">
+        <label>Your name</label>
+        <input type="text" id="inputName" placeholder="e.g. Sean" maxlength="30" autocomplete="off"/>
+      </div>
+      <div class="input-group">
+        <label>Age</label>
+        <input type="number" id="inputAge" placeholder="e.g. 16" min="10" max="100"/>
+      </div>
+      <div class="input-group">
+        <label>Biological sex</label>
+        <select id="inputSex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- STEP 2: Body stats -->
+    <div class="setup-step" id="step2">
+      <div class="step-title">Body stats 📏</div>
+      <p class="step-subtitle">Used to calculate your personalized calorie targets.</p>
+      <div class="input-group">
+        <label>Current height (inches)</label>
+        <input type="number" id="inputHeight" placeholder="e.g. 67 (5'7&quot;)" min="48" max="96"/>
+      </div>
+      <div class="input-group">
+        <label>Current weight (lbs)</label>
+        <input type="number" id="inputWeight" placeholder="e.g. 150" min="50" max="500"/>
+      </div>
+      <div class="input-group">
+        <label>Target weight (lbs)</label>
+        <input type="number" id="inputTarget" placeholder="e.g. 170" min="50" max="500"/>
+      </div>
+    </div>
+
+    <!-- STEP 3: Activity level -->
+    <div class="setup-step" id="step3">
+      <div class="step-title">How active are you? 🏃</div>
+      <p class="step-subtitle">How many minutes of physical activity do you get per day on average?</p>
+      <div class="slider-wrap">
+        <div class="slider-val" id="activityVal">60<span> min/day</span></div>
+        <input type="range" id="activitySlider" min="0" max="180" value="60" step="5"/>
+        <div class="slider-hints"><span>Sedentary</span><span>Very Active</span></div>
+      </div>
+      <div style="margin-top:20px;background:var(--primary-light);border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:var(--primary);">
+        💡 Include walks, gym sessions, sports — any movement counts!
+      </div>
+    </div>
+
+    <!-- STEP 4: Goal -->
+    <div class="setup-step" id="step4">
+      <div class="step-title">What's your goal? 🎯</div>
+      <p class="step-subtitle">This shapes your entire nutrition plan.</p>
+      <div class="goal-grid">
+        <div class="goal-card" data-goal="bulk" onclick="selectGoal(this)">
+          <span class="goal-emoji">💪</span>
+          <div class="goal-name">Bulk</div>
+          <div class="goal-desc">Gain weight & build muscle</div>
+        </div>
+        <div class="goal-card" data-goal="cut" onclick="selectGoal(this)">
+          <span class="goal-emoji">🔥</span>
+          <div class="goal-name">Cut</div>
+          <div class="goal-desc">Lose fat & lean out</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:var(--bg);border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:var(--muted);">
+        Your calorie target is calculated automatically based on your goal and body stats.
+      </div>
+    </div>
+
+    <!-- STEP 5: Diet length -->
+    <div class="setup-step" id="step5">
+      <div class="step-title">Diet length 📅</div>
+      <p class="step-subtitle">How many days do you want to follow this plan?</p>
+      <div class="slider-wrap">
+        <div class="slider-val" id="dietVal">30<span> days</span></div>
+        <input type="range" id="dietSlider" min="7" max="90" value="30" step="1"/>
+        <div class="slider-hints"><span>7 days</span><span>90 days</span></div>
+      </div>
+      <div style="margin-top:20px;background:var(--primary-light);border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:var(--primary);">
+        🔄 You can always update this later in your profile.
+      </div>
+    </div>
+
+    <!-- STEP 6: Dietary restrictions -->
+    <div class="setup-step" id="step6">
+      <div class="step-title">Any restrictions? 🥗</div>
+      <p class="step-subtitle">We'll filter your meal plan and food list automatically.</p>
+      <div class="toggle-list">
+        <div class="toggle-row" data-key="vegan">
+          <div class="toggle-left">
+            <span class="toggle-emoji">🌱</span>
+            <div>
+              <div class="toggle-title">Vegan</div>
+              <div class="toggle-sub">No animal products</div>
+            </div>
+          </div>
+          <div class="switch"></div>
+        </div>
+        <div class="toggle-row" data-key="peanutAllergy">
+          <div class="toggle-left">
+            <span class="toggle-emoji">🥜</span>
+            <div>
+              <div class="toggle-title">Peanut Allergy</div>
+              <div class="toggle-sub">Removes all nut-based foods</div>
+            </div>
+          </div>
+          <div class="switch"></div>
+        </div>
+      </div>
+      <div style="margin-top:20px;background:var(--bg);border-radius:14px;padding:16px;font-size:13px;font-weight:700;color:var(--muted);">
+        🎉 After this, we'll generate your personalized 7-day meal plan!
+      </div>
+    </div>
+
+  </div><!-- /setup-body -->
+  </div><!-- /setup-panel -->
+
+  <!-- Sticky footer nav -->
+  <div class="setup-footer">
+    <button class="btn-primary" id="nextBtn" onclick="nextStep()">Continue →</button>
+    <button class="btn-secondary" id="backBtn" onclick="prevStep()" style="margin-top:10px;display:none;">← Back</button>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="setupToast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/nutrition.js"></script>
+  <script src="js/setup.js"></script>
+  <script>
+    // Show/hide back button
+    const origShow = showStep;
+    window.showStep = function(n) {
+      origShow(n);
+      document.getElementById('backBtn').style.display = n > 1 ? 'block' : 'none';
+    };
+
+    function selectGoal(card) {
+      document.querySelectorAll('.goal-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      formData.goal = card.dataset.goal;
+    }
+  </script>
+</body>
+</html>
