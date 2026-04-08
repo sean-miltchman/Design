@@ -2,7 +2,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ─── DESIGN TOKENS ─────────────────────────────── */
+/* â”€â”€â”€ DESIGN TOKENS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root {
   --bg:        #09090E;
   --surface:   #111118;
@@ -43,7 +43,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── WELCOME PAGE ───────────────────────────────── */
+/* â”€â”€â”€ WELCOME PAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .welcome-page {
   background: var(--bg);
   min-height: 100vh;
@@ -164,12 +164,13 @@ body {
 
 .privacy-note { font-size: 12px; color: var(--muted2); margin-top: 14px; font-weight: 500; }
 
-/* ─── SETUP PAGE ─────────────────────────────────── */
+/* â”€â”€â”€ SETUP PAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .setup-page {
   background: var(--bg);
   min-height: 100vh;
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
+  justify-content: center;
 }
 .setup-panel {
   max-width: 560px;
@@ -264,7 +265,7 @@ input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
 }
 .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* ─── APP LAYOUT ─────────────────────────────────── */
+/* â”€â”€â”€ APP LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .app-layout { display: flex; min-height: 100vh; }
 
 .sidebar {
@@ -321,11 +322,11 @@ input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
   max-width: calc(100vw - var(--sidebar-w));
 }
 
-/* ─── TABS ───────────────────────────────────────── */
+/* â”€â”€â”€ TABS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tab { display: none; }
 .tab.active { display: block; }
 
-/* ─── HOME TAB ───────────────────────────────────── */
+/* â”€â”€â”€ HOME TAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .home-topbar {
   display: flex;
   justify-content: space-between;
@@ -387,7 +388,7 @@ input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
 .mbar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
 .mbar-nums { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 64px; text-align: right; }
 
-/* Meals grid — 4 columns on desktop */
+/* Meals grid â€” 4 columns on desktop */
 .meals-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -435,7 +436,7 @@ input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
 /* Legacy cmeal classes (kept for JS compat, hidden on desktop) */
 .cmeal-row, .cmeal-expand, .meals-compact-card { display: none; }
 
-/* ─── LOG TAB ────────────────────────────────────── */
+/* â”€â”€â”€ LOG TAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .log-layout { display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: start; }
 .log-main { }
 .log-sidebar { position: sticky; top: 0; }
@@ -517,7 +518,7 @@ input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
 .ltf-name { font-weight: 600; }
 .ltf-cal { color: var(--muted); }
 
-/* ─── PLAN TAB ───────────────────────────────────── */
+/* â”€â”€â”€ PLAN TAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .plan-desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 .plan-left { }
 .plan-right { position: sticky; top: 0; }
@@ -661,7 +662,7 @@ input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
 .pwe-foods { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pwe-cals { font-weight: 700; color: var(--muted); white-space: nowrap; }
 
-/* ─── STATS TAB ──────────────────────────────────── */
+/* â”€â”€â”€ STATS TAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 .stats-left { }
 .stats-right { }
@@ -717,7 +718,7 @@ input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
 .badge-name { font-size: 11px; font-weight: 800; margin-bottom: 2px; }
 .badge-desc { font-size: 10px; color: var(--muted); font-weight: 500; line-height: 1.3; }
 
-/* ─── BOTTOM SHEET MODAL ─────────────────────────── */
+/* â”€â”€â”€ BOTTOM SHEET MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200;
   opacity: 0; pointer-events: none; transition: opacity 0.25s;
@@ -743,7 +744,7 @@ input[type=range].amount-slider { width: 100%; accent-color: var(--violet); marg
 .mprev .mv { font-size: 20px; font-weight: 900; }
 .mprev .ml { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
 
-/* ─── EDIT PROFILE MODAL ─────────────────────────── */
+/* â”€â”€â”€ EDIT PROFILE MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .modal-bg {
   position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 300;
   opacity: 0; pointer-events: none; transition: opacity 0.2s;
@@ -762,7 +763,7 @@ input[type=range].amount-slider { width: 100%; accent-color: var(--violet); marg
 .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
 .modal-actions button { flex: 1; }
 
-/* ─── TOAST ──────────────────────────────────────── */
+/* â”€â”€â”€ TOAST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .toast {
   position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px);
   background: var(--surface2); border: 1px solid var(--border2); color: var(--text);
@@ -773,11 +774,11 @@ input[type=range].amount-slider { width: 100%; accent-color: var(--violet); marg
 .toast.cheat { background: linear-gradient(135deg, #F59E0B, #F97316); color: white; border-color: transparent; }
 .toast.badge { background: var(--violet-dim); border-color: var(--violet); color: var(--violet); }
 
-/* ─── CONFETTI ───────────────────────────────────── */
+/* â”€â”€â”€ CONFETTI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .confetti-piece { position: fixed; border-radius: 2px; animation: confetti-fall 2.5s ease-in forwards; z-index: 999; pointer-events: none; }
 @keyframes confetti-fall { 0% { opacity: 1; transform: translateY(-20px) rotate(0deg); } 100% { opacity: 0; transform: translateY(100vh) rotate(720deg); } }
 
-/* ─── MOBILE BOTTOM NAV (≤900px only) ───────────── */
+/* â”€â”€â”€ MOBILE BOTTOM NAV (â‰¤900px only) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .bottom-nav { display: none; }
 
 @media (max-width: 900px) {
